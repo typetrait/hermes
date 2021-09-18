@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
 using System.Windows.Forms;
@@ -29,9 +29,7 @@ namespace Hermes
             SetDelay((int)delayField.Value);
             timer.Tick += Timer_Tick;
 
-            //driver = new FirefoxDriver();
             driver = new FirefoxDriver();
-            //driver = new ChromeDriver();
 
             driver.Navigate().GoToUrl("https://discordapp.com/");
         }
@@ -55,10 +53,8 @@ namespace Hermes
                 currentChannelTextBox.Text = $"{GetCurrentServerName()}@{GetCurrentChannelName()}";
 
                 if (targetServer != GetCurrentServerName() || targetChannel != GetCurrentChannelName())
-                {
                     return;
-                }
-
+                    
                 var discordMessageBox = GetMessageBox();
 
                 discordMessageBox.SendKeys(messages[random.Next(0, messages.Length)]);
@@ -81,7 +77,6 @@ namespace Hermes
             try
             {
                 isRunning = true;
-
                 timer.Start();
                 startButton.Text = "Stop";
 
@@ -108,21 +103,20 @@ namespace Hermes
         private void Stop()
         {
             isRunning = false;
-
             timer.Stop();
             startButton.Text = "Start";
         }
 
         private IWebElement GetMessageBox()
         {
-            return driver.FindElement(By.ClassName("textArea-2Spzkt"));
+            return driver.FindElement(By.ClassName("textArea-12jD-V"));
         }
 
         private string GetCurrentServerName()
         {
             try
             {
-                var currentServerName = driver.FindElement(By.ClassName("name-3YKhmS")).Text;
+                var currentServerName = driver.FindElement(By.ClassName("name-1jkAdW")).Text;
                 return currentServerName;
             }
             catch (NoSuchElementException)
